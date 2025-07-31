@@ -1,0 +1,6 @@
+/aes_venv
+.env
+.docx
+.pkl
+*.json
+.json
