@@ -29,9 +29,15 @@ def query(payload):
 REPO_ID = "Ayonitemi-Feranmi/aes_grader"
 FILENAME = "aes_grader.pkl"
 
+USE_OFFLINE = True
+
+# if USE_OFFLINE:
+#     model_path = "/model/aes_grader.pkl"
+#     model = joblib.load(model_path)
+# else:
 model = joblib.load(
-    hf_hub_download(repo_id=REPO_ID, filename=FILENAME, token=os.getenv("HF_TOKEN"))
-)
+        hf_hub_download(repo_id=REPO_ID, filename=FILENAME, token=os.getenv("HF_TOKEN"))
+    )
 
 # with open(r"C:\Users\Rise Networks\Desktop\AI_theory_grader\aes_grader.pkl", "rb") as f:
 #     aes_grader = pkl.load(f)
@@ -80,4 +86,4 @@ def return_score(data: Exam_Data):
 
 
 if __name__ == "__main__":
-    return_score()
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
