@@ -1,10 +1,8 @@
-ipykernel
+python-dotenv
 requests
-tensorflow
-tf-keras
 huggingface_hub
 fastapi
 uvicorn
 pydantic
-hf_xet
-docker
+numpy==1.24.4
+joblib

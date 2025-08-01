@@ -6,7 +6,7 @@ from huggingface_hub import InferenceClient, hf_hub_download
 import os
 from dotenv import load_dotenv
 import numpy as np
-import pickle as pkl
+# import pickle as pkl
 import requests
 import joblib
 
@@ -33,8 +33,8 @@ model = joblib.load(
     hf_hub_download(repo_id=REPO_ID, filename=FILENAME, token=os.getenv("HF_TOKEN"))
 )
 
-with open(r"C:\Users\Rise Networks\Desktop\AI_theory_grader\aes_grader.pkl", "rb") as f:
-    aes_grader = pkl.load(f)
+# with open(r"C:\Users\Rise Networks\Desktop\AI_theory_grader\aes_grader.pkl", "rb") as f:
+#     aes_grader = pkl.load(f)
 
 # creating a BaseModel class to take in the question data info
 class Exam_Data(BaseModel):
