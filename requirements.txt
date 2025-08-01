@@ -1,8 +1,6 @@
 ipykernel
 requests
-keras
 tensorflow
-sentence-transformers
 tf-keras
 huggingface_hub
 fastapi
