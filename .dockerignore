@@ -1,9 +1,6 @@
 aes_venv/
 __pycache__/
 
-.env
-*.env*
-env.*
 
 .json
 *.json*

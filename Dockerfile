@@ -2,11 +2,10 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
+COPY requirements.txt /app/requirements.txt
+
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+
 COPY . /app
 
-COPY ./model/aes_grader.pkl /app/model/aes_grader.pkl
-
-
-RUN pip install --upgrade pip==23.3.1
-
-RUN pip install --no-cache-dir --progress-bar=on --verbose -r requirements.txt
+CMD [ "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

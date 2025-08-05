@@ -10,13 +10,14 @@ import numpy as np
 import requests
 import joblib
 
-load_dotenv()
+load_dotenv('/app/.env')
 
 # Creating an instance of the fastapi
 app = FastAPI()
 
 # using requests to access the model
-API_URL = "https://router.huggingface.co/hf-inference/models/facebook/bart-base/pipeline/feature-extraction"
+API_URL = API_URL = "https://api-inference.huggingface.co/models/sentence-transformers/all-MiniLM-L6-v2"
+
 headers = {
     "Authorization": f"Bearer {os.getenv('HF_TOKEN')}",
 }
@@ -70,10 +71,12 @@ def return_score(data: Exam_Data):
         compare_embedding = np.mean(query({"inputs": f"{json_data['answer']}"}), axis=0)
 
         # input vector:finding the difference between the two embedding while reshaping to the attention structure
-        input_vector = np.array(np.abs(source_embedding, compare_embedding)).reshape(1, 1, 768)
+        input_vector = np.abs(np.array(source_embedding) - np.array(compare_embedding)).reshape(1, 1, 768)
+
 
         # making predictions with the aes_grader model
         score = model.predict(input_vector)
+        score = 1 / (1 + np.exp(-score))
         print(score)
         # creating a threshold for the similarity score
         if score >= 0.5:
